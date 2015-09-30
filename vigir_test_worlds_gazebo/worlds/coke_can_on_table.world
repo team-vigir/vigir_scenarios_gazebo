@@ -94,12 +94,18 @@
           </inertia>
         </inertial>
         <collision name='collision'>
-          <pose>0 0 -0.23 0 -0 0</pose>
+          <pose>-0.005 -0.005 0.01 0 -0 0</pose>
           <geometry>
+            <!--
             <mesh>
               <uri>model://coke_can/meshes/coke_can.dae</uri>
               <scale>0.388567 0.388567 0.388567</scale>
             </mesh>
+            -->            
+            <cylinder>
+              <radius>0.0319015</radius>
+              <length>0.123</length>
+            </cylinder>
           </geometry>
           <surface>
             <friction>
