@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package>
+  <name>vigir_test_worlds_gazebo</name>
+  <version>0.0.0</version>
+  <description>The vigir_test_worlds_gazebo package provides gazebo worlds for testing robots</description>
+
+  <maintainer email="kohlbrecher@sim.tu-darmstadt.de">Stefan Kohlbrecher</maintainer>
+
+  <author email="kohlbrecher@sim.tu-darmstadt.de">Stefan Kohlbrecher</author>
+  <author email="romay@sim.tu-darmstadt.de">Alberto Romay</author>
+
+  <license>BSD</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>gazebo_ros</build_depend>
+  <run_depend>gazebo_ros</run_depend>
+
+  <export>
+    <gazebo_ros gazebo_media_path="${prefix}"/>
+  </export>
+</package>
