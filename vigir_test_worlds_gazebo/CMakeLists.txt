@@ -4,18 +4,17 @@ project(vigir_test_worlds_gazebo)
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
-find_package(catkin REQUIRED COMPONENTS
-  gazebo_ros
-)
+find_package(catkin REQUIRED COMPONENTS roscpp std_msgs std_srvs geometry_msgs nav_msgs tf dynamic_reconfigure)
+include_directories(include ${catkin_INCLUDE_DIRS})
 
-## System dependencies are found with CMake's conventions
-# find_package(Boost REQUIRED COMPONENTS system)
+## Find gazebo
+find_package(gazebo REQUIRED)
+include_directories(${GAZEBO_INCLUDE_DIRS})
+link_directories(${GAZEBO_LIBRARY_DIRS})
 
-
-## Uncomment this if the package has a setup.py. This macro ensures
-## modules and global scripts declared therein get installed
-## See http://ros.org/doc/api/catkin/html/user_guide/setup_dot_py.html
-# catkin_python_setup()
+## Find Boost
+find_package(Boost REQUIRED COMPONENTS thread)
+include_directories(${Boost_INCLUDE_DIRS})
 
 ################################################
 ## Declare ROS messages, services and actions ##
@@ -98,10 +97,10 @@ find_package(catkin REQUIRED COMPONENTS
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
-#  INCLUDE_DIRS include
-#  LIBRARIES vigir_test_worlds_gazebo
-#  CATKIN_DEPENDS gazebo_ros
-#  DEPENDS system_lib
+    DEPENDS gazebo
+    CATKIN_DEPENDS roscpp std_msgs geometry_msgs nav_msgs tf
+    INCLUDE_DIRS include
+    LIBRARIES HectorVehiclePlugin
 )
 
 ###########
@@ -111,9 +110,13 @@ catkin_package(
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
 # include_directories(include)
-include_directories(
-  ${catkin_INCLUDE_DIRS}
-)
+
+add_library(HectorVehiclePlugin SHARED src/HectorVehiclePlugin.cc)
+target_link_libraries(HectorVehiclePlugin ${GAZEBO_LIBRARIES} ${catkin_LIBRARIES})
+
+add_library(HectorVehicleROSPlugin src/HectorVehicleROSPlugin.cpp)
+target_link_libraries(HectorVehicleROSPlugin ${GAZEBO_LIBRARIES} ${catkin_LIBRARIES} HectorVehiclePlugin)
+add_dependencies(HectorVehicleROSPlugin HectorVehiclePlugin)
 
 ## Declare a C++ library
 # add_library(vigir_test_worlds_gazebo
@@ -144,33 +147,19 @@ include_directories(
 # all install targets should use catkin DESTINATION variables
 # See http://ros.org/doc/api/catkin/html/adv_user_guide/variables.html
 
-## Mark executable scripts (Python etc.) for installation
-## in contrast to setup.py, you can choose the destination
-# install(PROGRAMS
-#   scripts/my_python_script
-#   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
-# )
+install(DIRECTORY include/${PROJECT_NAME}/
+  DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
+  FILES_MATCHING PATTERN "*.h*"
+  PATTERN ".svn" EXCLUDE
+)
 
-## Mark executables and/or libraries for installation
-# install(TARGETS vigir_test_worlds_gazebo vigir_test_worlds_gazebo_node
-#   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-#   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-#   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
-# )
-
-## Mark cpp header files for installation
-# install(DIRECTORY include/${PROJECT_NAME}/
-#   DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
-#   FILES_MATCHING PATTERN "*.h"
-#   PATTERN ".svn" EXCLUDE
-# )
-
-## Mark other files for installation (e.g. launch and bag files, etc.)
-# install(FILES
-#   # myfile1
-#   # myfile2
-#   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
-# )
+install(TARGETS
+  HectorVehiclePlugin
+  HectorVehicleROSPlugin
+  ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
 
 #############
 ## Testing ##
