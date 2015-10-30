@@ -28,56 +28,11 @@
       <name>jersey_barrier_3</name>
       <pose>-42.801369 15.140183 0 0 0 -0.160001</pose>
     </include>
-
-
     
     <include>
       <uri>model://vrc_grass_plane2</uri>
     </include>
 
-    <include>
-      <uri>model://starting_pen</uri>
-      <static>true</static>
-      <pose>7.7 -10.14 0.0 0 0 -.221</pose>
-    </include>
-
-    <include>
-      <uri>model://gate</uri>
-      <name>gate_0</name>
-      <static>true</static>
-      <pose>9.75 -1.15 2.0 0 0 1.3491</pose>
-    </include>
-    <include>
-      <uri>model://gate_number_1</uri>
-      <name>gate_number_1_a</name>
-      <static>true</static>
-      <pose>11.847 -1.656 3.75 0 0 1.349</pose>
-    </include>
-    <include>
-      <uri>model://gate_number_1</uri>
-      <name>gate_number_1_b</name>
-      <static>true</static>
-      <pose>7.662 -0.77 3.75 0 0 1.3491</pose>
-    </include>
-
-    <include>
-      <uri>model://vehicle_gate</uri>
-      <name>vehiclegate_1</name>
-      <static>true</static>
-      <pose>-7.33 1.38 2 0 0 2.956</pose>
-    </include>
-    <include>
-      <uri>model://gate_number_2</uri>
-      <name>gate_number_2_a</name>
-      <static>true</static>
-      <pose>-7.95 -2.21 3.75 0 0 -0.1599</pose>
-    </include>
-    <include>
-      <uri>model://gate_number_2</uri>
-      <name>gate_number_2_b</name>
-      <static>true</static>
-      <pose>-6.62 4.97 3.75 0 0 3.039</pose>
-    </include>
 
     <include>
       <uri>model://speed_limit_sign</uri>
@@ -383,44 +338,6 @@
       <pose>-17.73 128.94 0 0 0 0.279</pose>
     </include>
 
-    <include>
-      <uri>model://vehicle_gate</uri>
-      <name>vehiclegate_2</name>
-      <static>true</static>
-      <pose>-12.13 126.33 2.0 0 0 0.279</pose>
-    </include>
-    <include>
-      <uri>model://gate_number_3</uri>
-      <name>gate_number_3_a</name>
-      <static>true</static>
-      <pose>-11.14 122.81 3.75 0 0 0.279</pose>
-    </include>
-    <include>
-      <uri>model://gate_number_3</uri>
-      <name>gate_number_3_b</name>
-      <static>true</static>
-      <pose>-13.08 129.80 3.75 0 0 0.279</pose>
-    </include>
-
-
-    <include>
-      <uri>model://gate</uri>
-      <name>gate_3</name>
-      <static>true</static>
-      <pose>-4.287 132.542 2.0 0 0 1.8505</pose>
-    </include>
-    <include>
-      <uri>model://gate_number_4</uri>
-      <name>gate_number_4_a</name>
-      <static>true</static>
-      <pose>-2.22 133.05 3.75 0 0 1.8505</pose>
-    </include>
-    <include>
-      <uri>model://gate_number_4</uri>
-      <name>gate_number_4_b</name>
-      <static>true</static>
-      <pose>-6.34 131.93 3.75 0 0 1.8505</pose>
-    </include>
 
 
     <road name="main_street">
